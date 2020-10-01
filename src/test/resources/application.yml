@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/before_its_too_late_test
+    username: postgres
+    password:

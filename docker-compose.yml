@@ -1,0 +1,17 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres:11-alpine
+    volumes:
+      - postgres:/var/lib/postgresql11/data
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=before_its_too_late_test
+
+volumes:
+  postgres:
