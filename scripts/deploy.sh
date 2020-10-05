@@ -1,12 +1,14 @@
 #!/bin/bash
 
 # GET FLAGS FOR ENVIRONMENT
-while getopts e:v: flag
+while getopts v: flag
 do
     case "${flag}" in
         v) version=${OPTARG};;
     esac
 done
+
+echo "$GITHUB_TOKEN"
 
 # CHECK IF VERSION HAS CORRECT VALUES
 if [ "$version" != "major" ] && [ "$version" != "minor" ] && [ "$version" != "patch" ]; then
@@ -14,7 +16,7 @@ if [ "$version" != "major" ] && [ "$version" != "minor" ] && [ "$version" != "pa
   exit 1
 fi
 
-echo "Generating new $version deployment tag for Environment: $env"
+echo "Generating new $version deployment tag"
 
 # GET LAST PRODUCTION TAG
 VERSION=`git describe --match "v[0-9].[0-9].[0-9]" --abbrev=0 --tags`
@@ -33,6 +35,9 @@ case "${version}" in
 esac
 
 # GENERATE NEW TAG
-NEW_TAG="$VNUM1.$VNUM2.$VNUM3"
+NEW_TAG="v$VNUM1.$VNUM2.$VNUM3"
 
 echo $NEW_TAG
+git tag $NEW_TAG
+
+git push --tags
