@@ -16,6 +16,7 @@ class Task private constructor(
     @Column(name = "description")
     val description: String?,
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
     var status: TaskStatus
 ) {

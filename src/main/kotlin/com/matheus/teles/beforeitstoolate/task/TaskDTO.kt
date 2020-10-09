@@ -8,12 +8,15 @@ data class TaskDTO(
     @JsonProperty("title")
     val title: String,
     @JsonProperty("description")
-    val description: String?
+    val description: String?,
+    @JsonProperty("status")
+    val status: TaskStatus
 ) {
     companion object {
         fun from(task: Task) = TaskDTO(
             title = task.title,
-            description = task.description
+            description = task.description,
+            status = task.status
         )
     }
 }
